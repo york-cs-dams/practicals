@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require "gli"
+require_relative "../lib/size"
+
+include GLI::App
+
+program_desc "Size metrics for Ruby programs"
+
+desc 'Measures the number of lines of code in each source file'
+arg 'root', :optional
+command :loc do |c|
+  c.switch :blanks, default_value: true
+  c.switch :comments, default_value: true
+  c.action do |_, options, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Size::LOC.new(root, options).run
+  end
+end
+
+exit run(ARGV)
