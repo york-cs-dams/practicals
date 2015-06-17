@@ -26,19 +26,19 @@ Note that the `LOC` class provides the `@include_blanks` attribute which returns
 
 The sample projects in the `data` folder can be used to test your implementation. Start with the simplest sample project, `hello_world` by running: `scripts/size loc OPTIONS hello_world`. The expected results are:
 
-| Source File                 | LOC | LOC-W | LOC-C | LOC-WC |
+| Source File                 | LOC | LOC-B | LOC-C | LOC-BC |
 | :-------------------------- | :-- | :---- | :---- | :----- |
-| hello_world/hello_world.rb  | 8   | 7     | 7     | 6      |
+| hello_world/hello_world.rb  | 14  | 11    | 13    | 10     |
 
 Note that the command for each metric is as follows:
     * LOC: `scripts/size loc hello_world`
-    * LOC-W: `scripts/size loc --no-blanks hello_world`
+    * LOC-B: `scripts/size loc --no-blanks hello_world`
     * LOC-C: `scripts/size loc --no-comments hello_world`
-    * LOC-WC: `scripts/size loc --no-blanks --no-comments hello_world`
+    * LOC-BC: `scripts/size loc --no-blanks --no-comments hello_world`
 
 For a more thorough test of your implementation, try the `adamantium` sample project by running: `scripts/size loc OPTIONS adamantium`. The exepcted results are:
 
-| Source File                   | LOC | LOC-W | LOC-C | LOC-WC |
+| Source File                   | LOC | LOC-B | LOC-C | LOC-BC |
 | :---------------------------- | :-- | :---- | :---- | :----- |
 | adamantium/class_methods.rb   | 21  | 17    | 11    | 7      |
 | adamantium/freezer.rb         | 138 | 119   | 69    | 50     |
