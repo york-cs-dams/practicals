@@ -1,8 +1,10 @@
 require_relative "results"
+require 'pathname'
 
 module Metric
   class CountingMetric
     def initialize(root, options)
+      @root = Pathname.new(root)
       @source_files = Dir.glob("#{root}/**/*.rb")
     end
 
@@ -15,7 +17,7 @@ module Metric
     end
 
     def names
-      @source_files
+      @source_files.map { |f| Pathname.new(f).relative_path_from(@root).to_s }
     end
 
     def measurements
