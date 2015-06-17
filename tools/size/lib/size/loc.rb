@@ -15,6 +15,7 @@ module Size
       name
     end
 
+    # Start by editing this method
     def measure(source_file)
       lines = File.readlines(source_file)
       lines.size
