@@ -17,4 +17,15 @@ command :loc do |c|
   end
 end
 
+desc 'Measures the number of structural elements (methods, attributes) in each source file'
+arg 'root', :optional
+command :elements do |c|
+  c.desc 'The type of element to count. One of: modules, classes, methods, class_methods, attributes'
+  c.flag :type, must_match: %w(modules classes methods class_methods attributes), default_value: 'classes'
+  c.action do |_, options, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Size::Elements.new(root, options).run
+  end
+end
+
 exit run(ARGV)

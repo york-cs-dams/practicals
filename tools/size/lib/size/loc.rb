@@ -1,20 +1,19 @@
+require_relative "../metric/counting_metric"
+
 module Size
-  class LOC
+  class LOC < Metric::CountingMetric
     def initialize(root, options)
-      @source_files = Dir.glob("#{root}/**/*.rb")
+      super
       @include_blanks = options[:blanks]
       @include_comments = options[:comments]
     end
 
-    def run
-      puts "Measuring LOC:"
-      @source_files.each do |source_file|
-        measurement = measure(source_file)
-        puts "  * #{source_file} - #{measurement}"
-      end
+    def metric_name
+      name = "LOC"
+      name += ", ignoring blanks" unless @include_blanks
+      name += ", ignoring comments" unless @include_comments
+      name
     end
-
-    private
 
     def measure(source_file)
       lines = File.readlines(source_file)
