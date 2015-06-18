@@ -1,0 +1,19 @@
+AllCops:
+  Include:
+    - Gemfile
+    - Rakefile
+  Exclude:
+    - vendor/**/*
+    - data/**/*
+
+StringLiterals:
+  Enabled: false
+
+LineLength:
+  Max: 99
+
+Documentation:
+  Enabled: false
+
+Style/TrivialAccessors:
+  ExactNameMatch: true
