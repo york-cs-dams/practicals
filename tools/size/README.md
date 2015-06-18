@@ -11,57 +11,56 @@ You are to build a tool that can automatically measure the size of Ruby programs
 
 ## Building the size tool
 
-Your first task is to complete the `size` tool so that it implements all of the metrics discussed in the lectures.
+Your first task is to complete the `size` tool so that it implements all of the metrics discussed in the lectures. The code in this repository contains an executable which can be invoked using `scripts/size MODE PROJECT`. Run `scripts/size help` for more information.
 
-### Counting lines of code
+The sample projects in the `data` folder can be used to test the size tool.
 
-Starting with the `LOC` class (in `lib/size/loc.rb`), implement the metrics below. Note that the command to run for each metric is shown in brackets.
+If you run, say, `scripts/size files hello_world` you'll notice that the `size tool` doesn't do much yet:
 
-* Lines of code per source file. (`scripts/size loc`)
-* Lines of code per source file excluding whitespace. (`scripts/size loc --no-blanks`)
-* Lines of code per source file excluding comments. (`scripts/size loc --no-comments`)
-* Lines of code per source file excluding whitespace and comments. (`scripts/size loc --no-blanks --no-comments`)
+| Subject        | lines_of_code | number_of_modules | number_of_classes |
+| :------------- | :------------ | :---------------- | :---------------- |
+| hello_world.rb | ?             | ?                 | ?                 |
 
-Note that the `LOC` class provides the `@include_blanks` attribute which returns false iff the `--no-blanks` flags are passed in on the command line. The `@include_comments` attribute provides the same functionality for the `--no-comments` flag.
+### Measuring files
 
-The sample projects in the `data` folder can be used to test your implementation. Start with the simplest sample project, `hello_world` by running: `scripts/size loc OPTIONS hello_world`. The expected results are:
+Starting with the `FileMeasurer` class (in `lib/measurement/file_measurer.rb`), implement the metrics below.
 
-| Source File                 | LOC | LOC-B | LOC-C | LOC-BC |
-| :-------------------------- | :-- | :---- | :---- | :----- |
-| hello_world/hello_world.rb  | 14  | 11    | 13    | 10     |
+* Lines of code per source file.
+* Number of modules per source file.
+* Number of classes per source file.
 
-Note that the command for each metric is as follows:
+Note that each of the methods named `count_XXX` receive a file object. This is an instance of `Subjects::SourceFile` (in `lib/subjects/source_file.rb`). `SourceFile` provides two methods that you will need: `source` returns the file's source code and `ast` returns the file's Abstract Syntax Tree. You'll also want to make use of the parser gem's `Parser::AST::Processor` class. For a recap on Abstract Syntax Trees and `Parser::AST::Processor`, see the DAMS lecture on the Ruby Parser.
 
-* LOC: `scripts/size loc hello_world`
-* LOC-B: `scripts/size loc --no-blanks hello_world`
-* LOC-C: `scripts/size loc --no-comments hello_world`
-* LOC-BC: `scripts/size loc --no-blanks --no-comments hello_world`
+Test your implementation on the `hello_world` project by running `scripts/size files hello_world`. The expected results are:
 
-For a more thorough test of your implementation, try the `adamantium` sample project by running: `scripts/size loc OPTIONS adamantium`. The exepcted results are:
+| Subject        | lines_of_code | number_of_modules | number_of_classes |
+| :------------- | :------------ | :---------------- | :---------------- |
+| hello_world.rb | 13            | 0                 | 1                 |
 
-| Source File                   | LOC | LOC-B | LOC-C | LOC-BC |
-| :---------------------------- | :-- | :---- | :---- | :----- |
-| adamantium/class_methods.rb   | 21  | 17    | 11    | 7      |
-| adamantium/freezer.rb         | 138 | 119   | 69    | 50     |
-| adamantium/module_methods.rb  | 66  | 58    | 30    | 22     |
-| adamantium/mutable.rb         | 55  | 50    | 15    | 10     |
-| adamantium/version.rb         | 8   | 5     | 6     | 3      |
-| adamantium.rb                 | 107 | 93    | 59    | 45     |
+For a more thorough test of your implementation, try the `adamantium` sample project by running: `scripts/size files adamantium`. The expected results are:
+
+| Subject                      | lines_of_code | number_of_modules | number_of_classes |
+| :--------------------------- | :------------ | :---------------- | :---------------- |
+| adamantium/class_methods.rb  | 19            | 2                 | 0                 |
+| adamantium/freezer.rb        | 136           | 1                 | 5                 |
+| adamantium/module_methods.rb | 64            | 2                 | 0                 |
+| adamantium/mutable.rb        | 53            | 2                 | 0                 |
+| adamantium/version.rb        | 6             | 1                 | 0                 |
+| adamantium.rb                | 105           | 2                 | 0                 |
 
 
-### Counting structural elements
+### Measuring classes
 
-Next, extend `lib/size/elements.rb` to implement the metrics below. Note that the command to run for each metric is shown in brackets.
+Next, extend `ClassMeasurer` (in `lib/measurement/class_measurer.rb`) to implement the metrics below.
 
-* Number of classes per source file. (`scripts/size elements`)
-* Number of modules per source file. (`scripts/size elements --type=modules`)
-* Number of methods per source file. (`scripts/size elements --type=methods`)
-* Number of class methods per source file. (`scripts/size elements --type=class_methods`)
-* Number of attributes per source file. (`scripts/size elements --type=attributes`)
+* Lines of code per class.
+* Number of methods per class.
+* Number of class methods per class.
+* Number of attributes per class.
 
-Note that the implementation of the `Elements` class is already complete. The subclasses of `Counter` need to be completed. Each subclass `Counter` is an AST Processor and responds to `on_XXX` methods. (See the lectures on the Ruby parser for more information).
+Note that each of the methods named `count_XXX` receive a class object. This is an instance of `Subjects::Class` (in `lib/subjects/class.rb`) and, just like `SourceFile`, provides `source` and `ast` methods which you'll want to use.
 
-The implementations of ClassCounter, MethodCounter and ClassMethodCounter are very similar to the implementation of ModuleCounter. The implementation of AttributeCounter requires a bit more thought. Consider the following examples:
+Implementing the first 3 metrics will likely lead to code that is very similar to the metrics you have implemented in `FileMeasurer`. For the final metric (counting attributes), the implementation will require a bit more thought. Consider the following examples:
 
 ```ruby
 class Hello
@@ -89,33 +88,53 @@ end
 
 And here, it appears that there are no attributes (instance variables) at first glance. However, recall that `attr_accessor` (and `attr_reader` and `attr_writer`) are Ruby shorthands for defining attributes (along with getter and/or setter methods). For this program, name is an instance variable and our attribute counter should return a count of 1.
 
-The sample projects in the `data` folder can be used to test your implementation. Start with the simplest sample project, `hello_world` by running: `scripts/size loc OPTIONS hello_world`. The expected results are:
+Test your implementation on the `hello_world` project by running `scripts/size files hello_world`. The expected results are:
 
-| Source File                 | CLASSES | MODULES | METHODS | CMETHODS | ATTRIBUTES |
-| :-------------------------- | :------ | :------ | :------ | :------- | :--------- |
-| hello_world/hello_world.rb  | 1       | 0       | 2       | 0        | 1          |
+| Subject                   | lines_of_code | number_of_methods | number_of_class_methods | number_of_attribtutes |
+| :------------------------ | :------------ | :---------------- | :---------------------- | :-------------------- |
+| hello_world.rb#HelloWorld | 11            | 2                 | 0                       | 1                     |
 
-Note that the command for each metric is as follows:
 
-* CLASSES: `scripts/size elements hello_world`
-* MODULES: `scripts/size elements --type=modules hello_world`
-* METHODS: `scripts/size elements --type=methods hello_world`
-* CMETHODS: `scripts/size elements --type=class_methods hello_world`
-* ATTRIBUTES: `scripts/size elements --type=attributes hello_world`
+For a more thorough test of your implementation, try the `adamantium` sample project by running: `scripts/size files adamantium`. The expected results are:
 
-scripts/size elements --type=classes adamantium
-scripts/size elements --type=modules adamantium
-scripts/size elements --type=methods adamantium
-scripts/size elements --type=class_methods adamantium
-scripts/size elements --type=attributes adamantium
+| Subject                                   | lines_of_code | number_of_methods | number_of_class_methods | number_of_attribtutes |
+| :---------------------------------------- | :------------ | :---------------- | :---------------------- | :-------------------- |
+| adamantium/freezer.rb#Flat                | 15            | 0                 | 1                       | 0                     |
+| adamantium/freezer.rb#Deep                | 15            | 0                 | 1                       | 0                     |
+| adamantium/freezer.rb#UnknownFreezerError | 1             | 0                 | 0                       | 0                     |
+| adamantium/freezer.rb#OptionError         | 1             | 0                 | 0                       | 0                     |
+| adamantium/freezer.rb#Freezer             | 128           | 0                 | 6                       | 1                     |
 
-For a more thorough test of your implementation, try the `adamantium` sample project by running: `scripts/size loc OPTIONS adamantium`. The exepcted results are:
 
-| Source File                   | CLASSES | MODULES | METHODS | CMETHODS | ATTRIBUTES |
-| :---------------------------- | :------ | :------ | :------ | :------- | :--------- |
-| adamantium/class_methods.rb   | 0       | 2       | 1       | 0        | 0          |
-| adamantium/freezer.rb         | 5       | 1       | 0       | 6        | 1          |
-| adamantium/module_methods.rb  | 0       | 2       | 4       | 0        | 0          |
-| adamantium/mutable.rb         | 0       | 2       | 2       | 0        | 0          |
-| adamantium/version.rb         | 0       | 1       | 0       | 0        | 0          |
-| adamantium.rb                 | 0       | 2       | 4       | 2        | 0          |
+### Measuring methods
+
+Finally, extend MethodMeasurer (in `lib/measurement/method_measurer.rb` to implement the metrics below.
+
+* Lines of code per method.
+* Number of parameters per method.
+
+Note that each of the methods named `count_XXX` receive a method object (an instance of `lib/subjects/method.rb`).
+
+Test your implementation on the `hello_world` project by running `scripts/size files hello_world`. The expected results are:
+
+| Subject                   | lines_of_code | number_of_parameters |
+| :------------------------ | :------------ | :------------------- |
+| hello_world.rb#initialize | 3             | 1                    |
+| hello_world.rb#run        | 3             | 0                    |
+
+
+For a more thorough test of your implementation, try the `adamantium` sample project by running: `scripts/size files adamantium`. The expected results are:
+
+| Subject                                     | lines_of_code | number_of_parameters |
+| :------------------------------------------ | :------------ | :------------------- |
+| adamantium/class_methods.rb#new             | 3             | 1                    |
+| adamantium/module_methods.rb#freezer        | 3             | 0                    |
+| adamantium/module_methods.rb#memoize        | 6             | 1                    |
+| adamantium/module_methods.rb#included       | 4             | 1                    |
+| adamantium/module_methods.rb#memoize_method | 4             | 2                    |
+| adamantium/mutable.rb#freeze                | 3             | 0                    |
+| adamantium/mutable.rb#frozen?               | 3             | 0                    |
+| adamantium.rb#freezer                       | 3             | 0                    |
+| adamantium.rb#dup                           | 3             | 0                    |
+| adamantium.rb#transform                     | 5             | 1                    |
+| adamantium.rb#transform_unless              | 3             | 2                    |

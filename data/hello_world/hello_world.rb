@@ -7,7 +7,7 @@ class HelloWorld
   end
 
   def run
-    "Hello, #{name}!"
+    puts "Hello, #{name}!"
   end
 end
 

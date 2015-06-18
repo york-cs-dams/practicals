@@ -4,27 +4,32 @@ require_relative "../lib/size"
 
 include GLI::App
 
-program_desc "Size metrics for Ruby programs"
+program_desc "Size metrics for Ruby projects"
 
-desc 'Measures the number of lines of code in each source file'
+desc 'Measures files'
 arg 'root', :optional
-command :loc do |c|
-  c.switch :blanks, default_value: true
-  c.switch :comments, default_value: true
-  c.action do |_, options, args|
+command :files do |c|
+  c.action do |_, _, args|
     root = args.empty? ? Dir.pwd : File.expand_path(args.first)
-    Size::LOC.new(root, options).run
+    Measurement::FileMeasurer.new(root).run
   end
 end
 
-desc 'Measures the number of structural elements (methods, attributes) in each source file'
+desc 'Measures classes'
 arg 'root', :optional
-command :elements do |c|
-  c.desc 'The type of element to count. One of: modules, classes, methods, class_methods, attributes'
-  c.flag :type, must_match: %w(modules classes methods class_methods attributes), default_value: 'classes'
-  c.action do |_, options, args|
+command :classes do |c|
+  c.action do |_, _, args|
     root = args.empty? ? Dir.pwd : File.expand_path(args.first)
-    Size::Elements.new(root, options).run
+    Measurement::ClassMeasurer.new(root).run
+  end
+end
+
+desc 'Measures methods'
+arg 'root', :optional
+command :methods do |c|
+  c.action do |_, _, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Measurement::MethodMeasurer.new(root).run
   end
 end
 

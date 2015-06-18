@@ -1,2 +1,3 @@
-require_relative "size/elements"
-require_relative "size/loc"
+require_relative "measurement/file_measurer"
+require_relative "measurement/class_measurer"
+require_relative "measurement/method_measurer"
