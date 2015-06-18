@@ -10,7 +10,7 @@
 
 ```
 NAME
-    size - Size metrics for Ruby programs
+    size - Size metrics for Ruby projects
 
 SYNOPSIS
     size [global options] command [command options] [arguments...]
@@ -19,6 +19,8 @@ GLOBAL OPTIONS
     --help - Show this message
 
 COMMANDS
-    help - Shows a list of commands or help for one command
-    loc  - Measures the number of lines of code in each source file
+    classes - Measures classes
+    files   - Measures files
+    help    - Shows a list of commands or help for one command
+    methods - Measures methods
 ```
