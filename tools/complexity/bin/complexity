@@ -6,12 +6,12 @@ include GLI::App
 
 program_desc "Complexity metrics for Ruby projects"
 
-desc 'Measures methods'
+desc 'Measures Assignments, Branches and Conditions for methods'
 arg 'root', :optional
-command :methods do |c|
+command :abc do |c|
   c.action do |_, _, args|
     root = args.empty? ? Dir.pwd : File.expand_path(args.first)
-    Measurement::MethodMeasurer.new(root).run
+    Measurement::ABCMeasurer.new(root).run
   end
 end
 

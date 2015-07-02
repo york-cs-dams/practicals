@@ -1,1 +1,1 @@
-require_relative "measurement/method_measurer"
+require_relative "measurement/abc_measurer"

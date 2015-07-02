@@ -2,7 +2,7 @@ require_relative "../../../common/lib/measurement/measurer"
 require_relative "../../../common/lib/locator/method_locator"
 
 module Measurement
-  class MethodMeasurer < Measurer
+  class ABCMeasurer < Measurer
     def locator
       Locator::MethodLocator.new
     end
