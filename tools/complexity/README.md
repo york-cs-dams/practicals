@@ -120,7 +120,7 @@ For a much more useful test of your implementation (!) try the `adamantium` samp
 | :------------------------------------------ | :---------- |
 | adamantium/class_methods.rb#new             |  0          |
 | adamantium/module_methods.rb#freezer        |  0          |
-| adamantium/module_methods.rb#memoize        |  3          |
+| adamantium/module_methods.rb#memoize        |  2          |
 | adamantium/module_methods.rb#included       |  0          |
 | adamantium/module_methods.rb#memoize_method |  0          |
 | adamantium/mutable.rb#freeze                |  0          |
