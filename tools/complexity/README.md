@@ -83,7 +83,7 @@ For a more useful test of your implementation (!) try the `adamantium` sample pr
 
 | Subject                                     | branches |
 | :------------------------------------------ | :------- |
-| adamantium/class_methods.rb#new             | 1       |
+| adamantium/class_methods.rb#new             | 1        |
 | adamantium/module_methods.rb#freezer        | 0        |
 | adamantium/module_methods.rb#memoize        | 5        |
 | adamantium/module_methods.rb#included       | 1        |
