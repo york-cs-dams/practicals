@@ -1,5 +1,8 @@
 require_relative "../../../common/lib/measurement/measurer"
 require_relative "../../../common/lib/locator/method_locator"
+require_relative "assignment_counter"
+require_relative "branch_counter"
+require_relative "condition_counter"
 
 module Measurement
   class ABCMeasurer < Measurer
@@ -8,31 +11,27 @@ module Measurement
     end
 
     def measurements_for(method)
+      a = count_with(AssignmentCounter, method)
+      b = count_with(BranchCounter, method)
+      c = count_with(ConditionCounter, method)
+
       {
-        assignments: count_assignments(method),
-        branches: count_branches(method),
-        conditions: count_conditions(method),
-        abc: calculate_abc(method)
+        assignments: a,
+        branches: b,
+        conditions: c,
+        abc: magnitude(a, b, c)
       }
     end
 
-    def calculate_abc(method)
-      a, b, c = count_assignments(method), count_branches(method), count_conditions(method)
+    def count_with(counter_type, method)
+      counter = counter_type.new
+      counter.process(method.ast)
+      counter.count
+    end
 
+    def magnitude(a, b, c)
       # x**y means "x raised to the power of y"
       Math.sqrt(a**2 + b**2 + c**2).round(2)
-    end
-
-    def count_assignments(method)
-      0
-    end
-
-    def count_branches(method)
-      0
-    end
-
-    def count_conditions(method)
-      0
     end
   end
 end
