@@ -1,5 +1,5 @@
-require_relative "measurer"
-require_relative "../locator/method_locator"
+require_relative "../../../common/lib/measurement/measurer"
+require_relative "../../../common/lib/locator/method_locator"
 
 module Measurement
   class MethodMeasurer < Measurer
