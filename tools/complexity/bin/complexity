@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require "gli"
+require_relative "../lib/complexity"
+
+include GLI::App
+
+program_desc "Complexity metrics for Ruby projects"
+
+desc 'Measures methods'
+arg 'root', :optional
+command :methods do |c|
+  c.action do |_, _, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Measurement::MethodMeasurer.new(root).run
+  end
+end
+
+exit run(ARGV)
