@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require "gli"
+require_relative "../lib/clones"
+
+include GLI::App
+
+program_desc "Clone detection for Ruby projects"
+
+desc 'Identifies code clones'
+arg 'root', :optional
+command :detect do |c|
+  c.action do |_, _, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Detection::CloneDetector.new(root).run
+  end
+end
+
+exit run(ARGV)

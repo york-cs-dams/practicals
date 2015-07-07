@@ -17,6 +17,10 @@ module Subjects
       end
     end
 
+    def files_other_than(file)
+      files.reject { |f| f == file }
+    end
+
     def relative_path_to(absolute_path)
       base = Pathname.new(root)
       base = base.parent if root.end_with?(".rb")
