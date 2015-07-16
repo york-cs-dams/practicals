@@ -34,17 +34,10 @@ A simple yet reasonably effective way to identify code clones is to locate ident
 ]
 ```
 
-Your first task is to implement a method that compares two pieces of source code and identifies fragments that they have in common. Note that, for now, this method will return only one common fragment (i.e., an array of strings) and not an array of all common fragments (i.e., not an array of array of strings). Some test cases have been provided to explain the intended functionality of the common fragments algorithm. To get started, run the following commands (on your development machine, not in your virtual machine):
+Your first task is to implement a method that compares two pieces of source code and identifies fragments that they have in common. Note that, for now, this method will return only one common fragment (i.e., an array of strings) and not an array of all common fragments (i.e., not an array of array of strings). Some test cases have been provided to explain the intended functionality of the common fragments algorithm. Use the `scripts/tests` command to run the test cases. The first time that you run the tests, you will see several failures:
 
 ```sh
-> cd practicals
-> bundle install
-```
-
-From now on, use the `rspec` command to run the test cases. The first time that you run the tests, you will see several failures:
-
-```sh
-> rspec
+> scripts/tests
 ...
 Failed examples:
 
@@ -60,10 +53,10 @@ You can examine the expected behaviour of the common fragment method by looking 
 
 ### Computing longest common fragments
 
-Next, implement the `longest_common_fragment_with` method to locate common fragments with at least as many lines as any other common fragment. Once again, there are some test cases that you can use to get started. In `tools/common/spec/subjects/source_spec` change the `xdescribe` on line 43 to `describe` and run `rspec`. You will see some new failures:
+Next, implement the `longest_common_fragment_with` method to locate common fragments with at least as many lines as any other common fragment. Once again, there are some test cases that you can use to get started. In `tools/common/spec/subjects/source_spec` change the `xdescribe` on line 43 to `describe` and run `scripts/tests`. You will see some new failures:
 
 ```sh
-> rspec
+> scripts/tests
 ...
 rspec ./tools/common/spec/subjects/source_spec.rb:44 # Subjects::Source longest_common_fragment_with should find longest common fragment between two sources
 ```

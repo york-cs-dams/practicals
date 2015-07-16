@@ -5,5 +5,4 @@ gem "parser", "~> 2.2.0"
 gem "unparser", "~> 0.2.4"
 
 gem "bundler", "~> 1.10.3"
-gem "rake", "~> 10.4.2"
 gem "rspec", "~> 3.2.0"
