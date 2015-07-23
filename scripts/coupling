@@ -1,0 +1,2 @@
+#!/bin/sh
+vagrant ssh -c "cd /vagrant/data; GLI_DEBUG=true bundle exec /vagrant/tools/coupling/bin/coupling $1 $2 $3 $4 $5"

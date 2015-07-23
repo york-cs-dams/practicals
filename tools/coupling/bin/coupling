@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require "gli"
+require_relative "../lib/coupling"
+
+include GLI::App
+
+program_desc "Coupling metrics for Ruby projects"
+
+desc 'Measures message-passing coupling'
+arg 'root', :optional
+command :mpc do |c|
+  c.action do |_, _, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Measurement::MPCMeasurer.new(root).run
+  end
+end
+
+exit run(ARGV)
