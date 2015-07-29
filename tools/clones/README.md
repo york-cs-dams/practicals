@@ -249,7 +249,7 @@ Once this change has been made, running `clones` on adamantium will correctly re
 
 ## Bonus Exercise: Making the clone detection tool even better
 
-Currently the `clones` tool has several defficiencies. Address the most obvious of these by:
+Currently the `clones` tool has several deficiencies. Address the most obvious of these by:
 
 ### Listing **all** clones between every pair of files
 

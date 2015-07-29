@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require "gli"
+require_relative "../lib/cohesion"
+
+include GLI::App
+
+program_desc "Cohesion measurements for Ruby projects"
+
+desc 'Counts the number of related components in a class'
+arg 'root', :optional
+command :lcom4 do |c|
+  c.action do |_, _, args|
+    root = args.empty? ? Dir.pwd : File.expand_path(args.first)
+    Measurement::LCOM4Measurer.new(root).run
+  end
+end
+
+exit run(ARGV)
