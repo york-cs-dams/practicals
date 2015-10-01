@@ -322,7 +322,9 @@ The key to understanding `inject` is to notice that the return value of the bloc
 
 Q6. Revisit your answer to the question "Write a Ruby program that, given a string, returns all of the substrings of that string" (from the first part of this tutorial). How might you use some of the methods on Enumerable to solve the problem with less code?
 
-### Laziness
+### Laziness (Ruby 2.0 onwards)
+
+Note that lazy evaluation will not work on Ruby 1.9 (which is the version installed by default in the CS student labs).
 
 Enumerable also supports lazy iteration, which allows code to be written that is efficient when operating on large collections.
 
