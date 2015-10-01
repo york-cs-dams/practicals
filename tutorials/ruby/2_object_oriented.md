@@ -207,7 +207,9 @@ l.add_segment(6)
 ```
 
 
-From Ruby 2.1, parameters can be defined by keyword rather than positionally, as shown below. Note that this will not work on Ruby 1.9 (which is the version installed by default in the CS student labs):
+From Ruby 2.1, parameters can be defined by keyword rather than positionally, as shown below.
+
+*Note that the keyword arguments -- and hence the following code -- will not work on Ruby 1.9, which is the version installed by default in the CS student labs. You can instead use Ruby via Vagrant as discussed in the [Vagrant video](http://dams.flippd.it/videos/7) and [tutorial](../tools/vagrant.md).*
 
 ```ruby
 class Circle

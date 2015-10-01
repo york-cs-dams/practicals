@@ -324,7 +324,8 @@ Q6. Revisit your answer to the question "Write a Ruby program that, given a stri
 
 ### Laziness (Ruby 2.0 onwards)
 
-Note that lazy evaluation will not work on Ruby 1.9 (which is the version installed by default in the CS student labs).
+*Note that lazy iteration -- and hence the following code -- will not work on Ruby 1.9, which is the version installed by default in the CS student labs. You can instead use Ruby via Vagrant as discussed in the [Vagrant video](http://dams.flippd.it/videos/7) and [tutorial](../tools/vagrant.md).*
+
 
 Enumerable also supports lazy iteration, which allows code to be written that is efficient when operating on large collections.
 
