@@ -8,6 +8,8 @@ This third part covers functional programming in Ruby, and more specifically:
 * How to define Ruby closures, and how to use them to program in a functional style
 * How to use the built-in Enumerable module to program in a functional style
 
+The [first part](1_introduction.md) covered installation and the key Ruby data types, and the [second part](2_object_oriented.md) object-oriented programming in Ruby.
+
 ## Functional Programming in Ruby
 
 Although Ruby is an object-oriented language, it can be used to program in a functional style and many Rubyists do so.

@@ -7,6 +7,8 @@ This first part covers:
 * How to install and use the Ruby programming language
 * The key data types of Ruby including strings, symbols, arrays and hashes
 
+The [second part](2_object_oriented.md) covers object-oriented programming in Ruby, and the [third part](3_functional.md) functional programming in Ruby.
+
 ## Ruby Basics
 
 Most modern operating systems include a reasonably new version of Ruby by default. On Windows, Ruby can be installed via the imaginatively named [RubyInstaller](http://rubyinstaller.org).
@@ -163,7 +165,7 @@ else
   puts "Hello, stranger"
 end
 ```
-  
+
 This isn't very readable, so I hope you never encounter it. If you do, read this code as "if current_user isn't falsey" or "if current_user isn't nil and isn't false". Rather than write the code above, write the following (for now):
 
 ```ruby

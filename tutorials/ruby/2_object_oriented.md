@@ -8,6 +8,8 @@ This second part covers object-oriented programming in Ruby, and more specifical
 * How to define classes and methods in Ruby
 * Subtle but important points to consider when implementing Ruby classes including equality, hashing and pretty printing.
 
+The [first part](1_introduction.md) covered installation and the key Ruby data types. The [third part](3_functional.md) covers functional programming in Ruby.
+
 ## Object-Oriented Programming in Ruby
 
 Ruby is a pure object-oriented language: every Ruby value is an Object and conforms to some Class. So, unlike Java, primitives are objects:
@@ -87,7 +89,7 @@ Person = Class.new do
   define_method(:greet) do
     "Hello!"
   end
-  
+
   define_method(:drive) do |vehicle|
     vehicle.start
     while true
@@ -108,7 +110,7 @@ class Person
   def greet
     "Hello!"
   end
-  
+
   def drive(vehicle)
     vehicle.start
     while true
@@ -266,7 +268,7 @@ class Person
   def initialize(forename, surname)
     @fullname = "#{forename} #{surname}"
   end
-  
+
   def greeting
     "Hello, #{@fullname}"
   end
@@ -284,23 +286,23 @@ class Person
     @forename, @surname = forename, surname
     @fullname = "#{forename} #{surname}"
   end
-  
+
   def forename
     @forename
   end
-  
+
   def forename=(new_forename)
     @forename = new_forename
   end
-  
+
   def surname
     @surname
   end
-  
+
   def surname=(new_surname)
     @surname = new_surname
   end
-  
+
   def greeting
     "Hello, #{@fullname}"
   end
@@ -312,12 +314,12 @@ Providing getters and setters is such a common OO pattern that Ruby provides a s
 ```ruby
 class Person
   attr_accessor :forename, :surname
-  
+
   def initialize(forename, surname)
     @forename, @surname = forename, surname
     @fullname = "#{forename} #{surname}"
   end
-  
+
   def greeting
     "Hello, #{@fullname}"
   end
@@ -332,7 +334,7 @@ Person = Struct.new(:forename, :surname) do
   def fullname
     "#{forename} #{surname}"
   end
-  
+
   def greeting
     "Hello, #{fullname}"
   end
@@ -354,7 +356,7 @@ The third type of equality is essentially pointer comparison. It's very, very ra
 ```ruby
 class Money
   attr_accessor :pounds, :pence
-  
+
   def ==(other)
     other.pounds == pounds && other.pence == pence
   end
@@ -368,11 +370,11 @@ For most classes, the distinction between `eql?` and `==` is unimportant. In whi
 ```ruby
 class Money
   attr_accessor :pounds, :pence
-  
+
   def ==(other)
     other.pounds == pounds && other.pence == pence
   end
-  
+
   alias_method :eql?, :==
 end
 ```
@@ -382,15 +384,15 @@ It's normally only useful to have different implementations for `eql?` and `==` 
 ```ruby
 class Sterling
   attr_accessor :pounds, :pence
-  
+
   def eql?(other)
     other.pounds == pounds && other.pence == pence
   end
-  
+
   def ==(other)
     eql?(other.to_sterling)
   end
-  
+
   def to_sterling
     self
   end
@@ -398,15 +400,15 @@ end
 
 class USD
   attr_accessor :dollars, :cents
-  
+
   def eql?(other)
     other.dollars == dollars && other.cents == cents
   end
-  
+
   def ==(other)
     eql?(other.to_sterling)
   end  
-  
+
   def to_sterling
     # use an external service to convert self from USD to GBP
   end
@@ -435,13 +437,13 @@ Every Ruby object responds to the `hash` message, which requests a numerical ide
 ```ruby
 class Money
   attr_accessor :pounds, :pence
-  
+
   def ==(other)
     other.pounds == pounds && other.pence == pence
   end
-  
+
   alias_method :eql?, :==
-  
+
   def hash
     pounds.hash + pence.hash
   end
@@ -462,7 +464,7 @@ When defining a class, it's often useful to override `to_s` to provide a more us
 ```ruby
 class Money
   attr_accessor :pounds, :pence
-  
+
   def to_s
     "$" + pounds.to_s + "." + pence.to_s
   end
@@ -491,7 +493,7 @@ Inheritance in Ruby is achieved using the `<` operator when defining a new class
 ```ruby
 class Salesperson < Person
   attr_reader :sales_target
-  
+
   def initialize(forename, surname, sales_target)
     super(forename, surname)
     @sales_target = sales_target
@@ -525,7 +527,7 @@ And then including that module into a class:
 class Lecturer
   include Likeable
   attr_reader :name
-  
+
   def initialize(name)
     @name = name
   end
