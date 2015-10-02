@@ -1,26 +1,11 @@
 # DAMS Practicals
 
-1. Clone this repository `https://github.com/york-cs-dams/practicals.git`
+This repository contains all of the material needed for the DAMS practicals.
 
-2. Change directory `cd practicals`
+You will find that the [DAMS Flippd VLE](http://dams.flippd.it) provides links to the practicals from the relevant videos. You can work through the practicals in the order suggested on the DAMS Flippd VLE, or in another order if your prefer (Do have a chat with me if you'd like advice). You should complete all of the practicals as each one prepares you -- in some way or other -- for the summative assessment.
 
-3. Start the virtual machine containing the development environment `vagrant up`
+You should aim to complete the [Ruby](fundamentals/ruby/1_introduction.md) and [Vagrant](fundamentals/tools/vagrant.md) practicals first, as these are needed in almost every subsequent practical. Once you have completed these practicals, follow the steps below to setup your machine for the remaining DAMS practicals:
 
-4. Test that the environment is working with `scripts/size`. You should see:
-
-```
-NAME
-    size - Size metrics for Ruby projects
-
-SYNOPSIS
-    size [global options] command [command options] [arguments...]
-
-GLOBAL OPTIONS
-    --help - Show this message
-
-COMMANDS
-    classes - Measures classes
-    files   - Measures files
-    help    - Shows a list of commands or help for one command
-    methods - Measures methods
-```
+1. Clone this repository: `git clone https://github.com/york-cs-dams/practicals.git dams-practicals`
+2. Change directory: `cd dams-practicals`
+3. Start the DAMS Practicals virtual machine: `vagrant up`
