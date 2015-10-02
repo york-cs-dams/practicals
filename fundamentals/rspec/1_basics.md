@@ -12,6 +12,7 @@ The [second part](2_doubles.md) of this tutorial covers test doubles (stubbing, 
 
 *Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed in at the end of the [Vagrant tutorial](../tools/vagrant.md).*
 
+
 ## Installing RSpec
 
 If you are using the DAMS Vagrant VM for the practical classes or for the assessment, RSpec is already installed for you. That was easy.
@@ -134,8 +135,6 @@ end
 
 ## Common RSpec Matchers
 
-In RSpec, matchers are used to specify assertions (or "expectations"). We've seen one matcher already, `eq`.
+In RSpec, matchers are used to specify assertions (or "expectations"). We've seen two matchers already, `eq` and `raise_error`.
 
 Take a look at the [RSpec documentation for `eq`](http://rspec.info/documentation/3.3/rspec-expectations/#Equivalence), and then continue reading this page to become familiar with the other built-in matchers.
-
-Q2. Open the folder `fundamentals/rspec/bowling` in your favourite editor. Your mission is to implement the tests cases in the `bowling_spec.rb` file. The initial test cases are by no means a complete set: you should add some new test cases too. You can run the tests with `vado rake test:rspec:bowling`.
