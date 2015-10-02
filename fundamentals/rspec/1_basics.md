@@ -21,10 +21,10 @@ If you want to run RSpec on another machine, you can run `gem install rspec`. If
 
 ## Writing and running RSpec unit tests
 
-After [cloning](../../README.md) this repository, open the file `phase_1/problems/calculator/specs/max_spec.rb` in your favourite editor. You should see the following code:
+After [cloning](../../README.md) this repository, open the file `fundamentals/rspec/calculator/spec/max_spec.rb` in your favourite editor. You should see the following code:
 
 ```ruby
-require "calculator/max"
+require_relative "max"
 
 module Calculator
   describe Max do
@@ -51,7 +51,7 @@ An RSpec unit test comprises the following imporant elements:
 
 Note that the final test case has not been completed. Add an assertion of the form `expect(...).to eq(X)`.
 
-Run your tests with `vado rake test:rspectut`. You should see the following output:
+Run your tests with `vado rake test:rspec:calculator`. You should see the following output:
 
 ```
 ...
@@ -138,4 +138,4 @@ In RSpec, matchers are used to specify assertions (or "expectations"). We've see
 
 Take a look at the [RSpec documentation for `eq`](http://rspec.info/documentation/3.3/rspec-expectations/#Equivalence), and then continue reading this page to become familiar with the other built-in matchers.
 
-Q2. Open the files `phase_1/problems/bowling/lib/bowling.rb` and `phase_1/problems/bowling/spec/bowling_spec.rb` in your favourite editor. Your mission is to implement the tests cases in the latter file. The initial test cases are by no means a complete set: you should add some new test cases too.
+Q2. Open the folder `fundamentals/rspec/bowling` in your favourite editor. Your mission is to implement the tests cases in the `bowling_spec.rb` file. The initial test cases are by no means a complete set: you should add some new test cases too. You can run the tests with `vado rake test:rspec:bowling`.

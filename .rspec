@@ -1,3 +1,2 @@
 --color
---require ./tools/common/spec/spec_helper
---pattern tools/**/*_spec.rb
+--require ./habitable_programs/tools/common/spec/spec_helper
