@@ -100,7 +100,7 @@ echo awesomebox | sudo tee /etc/hostname
 sudo hostname -F /etc/hostname
 ```
 
-You should see that the shell prompt now reads `vagrant@awesomebox`, meaning that the previous two commands have worked.
+If you disconnect from the VM (`exit`) and reconnect (`vagrant ssh`). You should see that the shell prompt now reads `vagrant@awesomebox`, meaning that the two commands above have worked.
 
 ### Provisioning a VM
 
