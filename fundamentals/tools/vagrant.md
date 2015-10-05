@@ -123,6 +123,10 @@ You will mostly use the `vagrant up` and possibly the `vagrant ssh` commands in 
 * `vagrant halt` - stops your VM
 * `vagrant destroy` - stops and completely erases all trace of the VM: this is your ejector seat if your VM gets corrupted!
 
+### Inaccessible VMs
+
+When using Vagrant in the CS software labs, you will almost certainly encounter an "inaccessible VM" error which will prevent Vagrant from doing any useful work. If this happens to you, open VirtualBox and delete any boxes that relate to DAMS. You should then be able to run `vagrant up` to build a fresh box from scratch.
+
 
 ## DAMS and Vagrant
 
