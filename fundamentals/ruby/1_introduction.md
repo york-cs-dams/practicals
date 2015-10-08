@@ -205,6 +205,8 @@ Ruby provides a couple of handy syntactic shortcuts for defining arrays of Strin
 
 ```ruby
 %w(foo bar baz) # => ["foo", "bar", "baz"]
+
+# In Ruby 2.0 onwards:
 %i(foo bar baz) # => [:foo, :bar, :baz]
 ```
 
