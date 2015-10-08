@@ -118,3 +118,5 @@ describe Subscription do
   end
 end
 ```
+
+That's it for the second part of this RSpec tutorial. Move on to the [third part](3_integration.md) to learn about integration testing.

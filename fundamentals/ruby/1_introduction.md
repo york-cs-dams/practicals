@@ -317,3 +317,5 @@ Q8. Change your answer to your previous question to produce a Hash that contains
   6 => ["banana"]
 }
 ```
+
+That's it for the first part of this Ruby tutorial. Move on to the [second part](2_object_oriented.md) to learn about object-oriented programming in Ruby.

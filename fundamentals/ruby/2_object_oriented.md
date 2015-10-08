@@ -596,3 +596,5 @@ module MyAwesomeApp
   end
 end
 ```
+
+That's it for the second part of this Ruby tutorial. Move on to the [third part](3_functional.md) to learn about functional programming in Ruby.

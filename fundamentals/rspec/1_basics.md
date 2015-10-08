@@ -138,3 +138,5 @@ end
 In RSpec, matchers are used to specify assertions (or "expectations"). We've seen two matchers already, `eq` and `raise_error`.
 
 Take a look at the [RSpec documentation for `eq`](http://rspec.info/documentation/3.3/rspec-expectations/#Equivalence), and then continue reading this page to become familiar with the other built-in matchers.
+
+That's it for the first part of this RSpec tutorial. Move on to the [second part](2_doubles.md) to learn about test doubles.
