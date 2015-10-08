@@ -518,7 +518,7 @@ module Likeable
   end
 
   def like!
-    @likes += 1
+    @likes = likes + 1
   end
 end
 ```
