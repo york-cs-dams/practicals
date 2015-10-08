@@ -75,4 +75,4 @@ Q1. Take a look at Flippd's integration tests, starting with those for the [phas
 
 Q2. Suppose Flippd was to be extended such that if a user watched a video to the end, the video page would then display a "watched" label when that user visited the page again in the future. Write down, in plain English, two or three test cases for this functionality.
 
-Q3. Translate your plain English test cases from Q2 to RSpec integration tests that use Capybara.
+Q3. Translate your plain English test cases from Q2 to RSpec integration tests that use Capybara. (You may assume that there is a Capybara command called `watch_video` which will simulate playing a video until the end, if we are currently `visit`ing the page for that video).
