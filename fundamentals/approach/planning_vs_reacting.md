@@ -2,7 +2,7 @@
 
 The purpose of this tutorial is to consider different ways in which a software design problem can be approached. In other words, this is an examination of how a (light) software engineering process can be applied in your work.
 
-*Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed in at the end of the [Vagrant tutorial](../tools/vagrant.md).*
+*Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed at the end of the [Vagrant tutorial](../tools/vagrant.md).*
 
 
 ## Planning

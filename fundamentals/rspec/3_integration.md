@@ -6,7 +6,7 @@ This third part covers how to apply RSpec to perform integration ("or end-to-end
 
 The [first part](1_basics.md) of this tutorial covered writing your first RSpec tests, and the [second part](2_doubles.md) covered test doubles.
 
-*Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed in at the end of the [Vagrant tutorial](../tools/vagrant.md).*
+*Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed at the end of the [Vagrant tutorial](../tools/vagrant.md).*
 
 
 ## Integration testing

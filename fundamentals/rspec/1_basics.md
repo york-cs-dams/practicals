@@ -10,7 +10,7 @@ This first part covers:
 
 The [second part](2_doubles.md) of this tutorial covers test doubles (stubbing, mocking and spying with RSpec), and the [third part](3_integration.md) integration testing with RSpec.
 
-*Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed in at the end of the [Vagrant tutorial](../tools/vagrant.md).*
+*Note that this tutorial will not work with the Ruby installation on the CS student lab machines. You can instead use the Vagrant setup for DAMS practicals as discussed at the end of the [Vagrant tutorial](../tools/vagrant.md).*
 
 
 ## Installing RSpec
