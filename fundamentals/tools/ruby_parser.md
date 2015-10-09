@@ -165,4 +165,4 @@ In a subclass of `Parser::AST::Processor`, the `on_X` messages are invoked every
 
 Q4. Change the program shown above to parse "1 + 2 + 3", and then "1 + 2 + 3 + 4". What do you expect the program to print for each input? What does it actually print when you run the program on that input?
 
-Q5. Remove the line `super(node)` from the `on_send` method. What happens when you run the program on "1 + 2 + 3" and on "1 + 2 + 3 + 4"? Why?s
+Q5. Remove the line `super(node)` from the `on_send` method. What happens when you run the program on "1 + 2 + 3" and on "1 + 2 + 3 + 4"? Why?
