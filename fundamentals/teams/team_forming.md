@@ -15,18 +15,3 @@ Produce a "business card" with an illustration of your interviewee, their name, 
 
 ## Class introduction
 I will ask you to briefly present your teammate and their business card to the rest of the class.
-
-## Build a skyscraper
-In your teams, build the tallest skyscraper whilst following the rules below:
-
-* You can only use the resources provided to your team by the lecturer.
-* Your tower must be able to support itself (e.g. no holding it up by hand!).
-* Ingenuity is encouraged; plagiarism is not (i.e. don’t search the internet for tips :-P).
-* You may wish to plan your skyscraper on pen and paper before starting construction. (Some people call this design...)
-
-## What next?
-You will very likely finish all of the activities in under two hours. So, what should you do next? You could:
-
-* Watch some of the lecture videos.
-* Speak with me about videos that you have already watched.
-* Start working through the DAMS [Ruby tutorial](../ruby/1_introduction.md).
