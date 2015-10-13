@@ -8,9 +8,9 @@ This practical covers:
 
 ## Building the cohesion tool
 
-Your first task is to complete the `cohesion` tool so that it implements the LCOM4 metric, which was discussed in the lectures. The code in this repository contains an executable which can be invoked using `scripts/cohesion lcom4 PROJECT`. Run `scripts/cohesion help` for more information.
+Your first task is to complete the `cohesion` tool so that it implements the LCOM4 metric, which was discussed in the lectures. The code in this repository contains an executable which can be invoked using `vado cohesion lcom4 PROJECT`. Run `vado cohesion help` for more information.
 
-The sample projects in the `data` folder can be used to test the cohesion tool. If you run, say, `scripts/cohesion lcom4 hello_world` you'll notice that the `cohesion` tool doesn't do much yet:
+The sample projects in the `data` folder can be used to test the cohesion tool. If you run, say, `vado cohesion lcom4 hello_world` you'll notice that the `cohesion` tool doesn't do much yet:
 
 | Subject                   | lcom4 | connected_components |
 | :------------------------ | :---- | :------------------- |
@@ -55,7 +55,7 @@ end
 
 An implementation of a LCOM4 Measurer that follows this architecture has been provided (see `lib/measurement/lcom4_measurer.rb`). You will need to complete the implementations of `ClassProcessor` and `MethodProcessor`.
 
-Apply the completed tool to the sample projects using `scripts/cohesion lcom4`. The expected results are:
+Apply the completed tool to the sample projects using `vado cohesion lcom4`. The expected results are:
 
 | Subject                                               | lcom4 | connected_components                                                            |
 | :---------------------------------------------------- | :---- | :------------------------------------------------------------------------------ |

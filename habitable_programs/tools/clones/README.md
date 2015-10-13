@@ -8,11 +8,11 @@ This practical covers:
 
 ## Building the clone detection tool
 
-Your first task is to complete the `clones` tool so that it implements Baker's algorithm, which was discussed in the lectures. The code in this repository contains an executable which can be invoked using `scripts/clones detect PROJECT`. Run `scripts/clones help` for more information.
+Your first task is to complete the `clones` tool so that it implements Baker's algorithm, which was discussed in the lectures. The code in this repository contains an executable which can be invoked using `vado clones detect PROJECT`. Run `vado clones help` for more information.
 
 The sample projects in the `data` folder can be used to test the clones tool. To get started, create a straightforward code clone by duplicating `data/hello_world/hello_world.rb` in a new file `data/hello_world/goodbye_world.rb`. Replace all instances of "Hello" with "Goodbye" in `data/hello_world/goodbye_world.rb`
 
-If you run, say, `scripts/clones detect hello_world` you'll notice that the `clones` tool doesn't do much yet:
+If you run, say, `vado clones detect hello_world` you'll notice that the `clones` tool doesn't do much yet:
 
 ```
 hello_world.rb
@@ -34,10 +34,10 @@ A simple yet reasonably effective way to identify code clones is to locate ident
 ]
 ```
 
-Your first task is to implement a method that compares two pieces of source code and identifies fragments that they have in common. Note that, for now, this method will return only one common fragment (i.e., an array of strings) and not an array of all common fragments (i.e., not an array of array of strings). Some test cases have been provided to explain the intended functionality of the common fragments algorithm. Use the `scripts/tests` command to run the test cases. The first time that you run the tests, you will see several failures:
+Your first task is to implement a method that compares two pieces of source code and identifies fragments that they have in common. Note that, for now, this method will return only one common fragment (i.e., an array of strings) and not an array of all common fragments (i.e., not an array of array of strings). Some test cases have been provided to explain the intended functionality of the common fragments algorithm. Use `vado bundle exec rspec` to run the test cases. The first time that you run the tests, you will see several failures:
 
 ```sh
-> scripts/tests
+> vado bundle exec rspec
 ...
 Failed examples:
 
@@ -53,17 +53,17 @@ You can examine the expected behaviour of the common fragment method by looking 
 
 ### Computing longest common fragments
 
-Next, implement the `longest_common_fragment_with` method to locate common fragments with at least as many lines as any other common fragment. Once again, there are some test cases that you can use to get started. In `tools/common/spec/subjects/source_spec` change the `xdescribe` on line 43 to `describe` and run `scripts/tests`. You will see some new failures:
+Next, implement the `longest_common_fragment_with` method to locate common fragments with at least as many lines as any other common fragment. Once again, there are some test cases that you can use to get started. In `tools/common/spec/subjects/source_spec` change the `xdescribe` on line 43 to `describe` and run `vado bundle exec rspec`. You will see some new failures:
 
 ```sh
-> scripts/tests
+> vado bundle exec rspec
 ...
 rspec ./tools/common/spec/subjects/source_spec.rb:44 # Subjects::Source longest_common_fragment_with should find longest common fragment between two sources
 ```
 
 Your implementation of the longest common fragment algorithm should be specified in the `longest_common_fragment_with` method of `./tools/common/lib/subjects/source.rb`. Hint: a recursive solution will change the method signature to `longest_common_fragment_with(other_source, longest_yet = [])`.
 
-Once the `longest_common_fragment_with` method is complete, you can start using the `clones` tool to identify code clones within a project. For example, running `scripts/clones detect hello_world` will produce some useful output:
+Once the `longest_common_fragment_with` method is complete, you can start using the `clones` tool to identify code clones within a project. For example, running `vado clones detect hello_world` will produce some useful output:
 
 ```ruby
 # goodbye_world.rb
@@ -91,12 +91,12 @@ Once the `longest_common_fragment_with` method is complete, you can start using 
 
 ## Improving the clone detection tool
 
-When running the initial implemenation of `clones` on more realistic projects, it becomes apparent that it often reports false postivies (i.e., fragments of text that are not code clones, or that are not interesting code clones). For example, running `scripts/clones detect adamantium` will return lots of fragments that return comments and common Ruby keywords. Let's fix this...
+When running the initial implemenation of `clones` on more realistic projects, it becomes apparent that it often reports false postivies (i.e., fragments of text that are not code clones, or that are not interesting code clones). For example, running `vado clones detect adamantium` will return lots of fragments that return comments and common Ruby keywords. Let's fix this...
 
 The most reliable way to remove comments from Ruby source code is to use the Ruby parser to build an AST (which strips away comments by default) and then to use the unparser to pretty print the AST. The `Source` file provides a `normalized_source` method that strips comments using these technique. To make use of this, simply change line 20 of `tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.normalized_source, other_file.normalized_source) }`. Once the `clones` tool ignores comments, it will identify fewer clones for adamantium:
 
 ```sh
-> scripts/clones detect adamantium
+> vado clones detect adamantium
 adamantium/class_methods.rb
 ---------------------------
 adamantium/mutable.rb:7..10 matches 4..7:
@@ -213,7 +213,7 @@ module Adamantium
 Removing uninteresting code clones (e.g., a series of `end` keywords) is a bit tricker, and is your next task. Change the implementation of Source to ignore fragments whose lines only contain the `end`, `class`, `module` and `self` keywords. Once the `clones` tool ignores these uninteresting fragments, it will identify fewer clones for adamantium:
 
 ```sh
-> scripts/clones detect adamantium
+> vado clones detect adamantium
 adamantium/class_methods.rb
 ---------------------------
 

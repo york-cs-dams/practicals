@@ -8,11 +8,11 @@ This practical covers:
 
 ## Building the coupling tool
 
-Your first task is to complete the `coupling` tool so that it implements the MPC metric, which was discussed in the lectures. The code in this repository contains an executable which can be invoked using `scripts/coupling mpc PROJECT`. Run `scripts/coupling help` for more information.
+Your first task is to complete the `coupling` tool so that it implements the MPC metric, which was discussed in the lectures. The code in this repository contains an executable which can be invoked using `vado coupling mpc PROJECT`. Run `vado coupling help` for more information.
 
 The sample projects in the `data` folder can be used to test the complexity tool.
 
-If you run, say, `scripts/coupling mpc hello_world` you'll notice that the `coupling` tool already reports some values:
+If you run, say, `vado coupling mpc hello_world` you'll notice that the `coupling` tool already reports some values:
 
 | Subject                               | total_messages_passed | messages_passed_to_self | messages_passed_to_ancestors | mpc |
 | :------------------------------------ | :-------------------- | :---------------------- | :--------------------------- | :-- |
@@ -23,7 +23,7 @@ Recall that the MPC metric is computed as: Total Messages - (Messages To Self + 
 
 The implementation of computing MPC and Total Messages is already complete (see `lib/measurement/mpc_measurer.rb`). You will need to complete the implementations for computing the number of messages to self and messages to ancestors. For the later, note that only messages sent explicitly to the receiver `super` are messages passed to ancestors in Ruby.
 
-Apply the completed tool to the sample projects using `scripts/coupling mpc`. The expected results are:
+Apply the completed tool to the sample projects using `vado coupling mpc`. The expected results are:
 
 | Subject                                                | total_messages_passed | messages_passed_to_self | messages_passed_to_ancestors | mpc |
 | :----------------------------------------------------- | :-------------------- | :---------------------- | :--------------------------- | :-- |
