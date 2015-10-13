@@ -3,7 +3,6 @@
 This practical covers:
 
 * Implementing the MPC metric for measuring coupling
-* ...
 * Investigating how the CBO metric can be implemented for dynamic languages like Ruby
 
 ## Building the coupling tool

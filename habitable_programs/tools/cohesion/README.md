@@ -3,7 +3,6 @@
 This practical covers:
 
 * Implementing the LCOM4 metric for computing the cohesion of a class
-* ...
 * Extending the LCOM4 metric to better suit Ruby
 
 ## Building the cohesion tool
@@ -19,10 +18,10 @@ The sample projects in the `data` folder can be used to test the cohesion tool. 
 
 ### Exploring the dependency graph class
 
-Recall that the LCOM4 metric is calculated by counting the number of isolated subgraphs from a class's dependency graph. Because Ruby doesn't provide a built-in graph data structure, a helper class (`DependencyGraph`) has been provided. Start the practical by exploring the `DependencyGraph` class in `irb`:
+Recall that the LCOM4 metric is calculated by counting the number of isolated subgraphs from a class's dependency graph. Because Ruby doesn't provide a built-in graph data structure, a helper class (`DependencyGraph`) has been provided. Start the practical by exploring the `DependencyGraph` class in `vado irb`:
 
 ```ruby
-require_relative "tools/cohesion/lib/measurement/dependency_graph"
+require_relative "habitable_programs/tools/cohesion/lib/measurement/dependency_graph"
 g = Measurement::DependencyGraph.new
 
 # Suppose that a bake method calls a roll and a cook method:
@@ -36,7 +35,7 @@ g.components_summary # => "[:bake, :cook, :roll]"
 g.add(:worse_rating, :rating)
 g.add(:rating, :likes)
 g.number_of_components # => 2
-g.components_summary # => "[:bake, :cook, :roll], "[:likes, :rating, :worse_rating]""
+g.components_summary # => "[:bake, :cook, :roll], [:likes, :rating, :worse_rating]"
 
 # What happens if you now add a dependency between bake and rating?
 ```

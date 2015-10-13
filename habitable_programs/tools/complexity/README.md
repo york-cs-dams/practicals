@@ -12,9 +12,10 @@ Your first task is to complete the `complexity` tool so that it implements the A
 
 The sample projects in the `data` folder can be used to test the complexity tool.
 
-If you run, say, `vado complexity abc hello_world` you'll notice that the `complexity tool` doesn't do much yet:
+If you run, say, `vado complexity abc hello_world` you'll notice that the complexity tool doesn't do much yet:
 
 | Subject                   | assignments | branches | conditions | abc |
+| :------------------------ | :---------- | :------- | :--------- | :-- |
 | hello_world.rb#initialize | 0           | 0        | 0          | 0.0 |
 | hello_world.rb#run        | 0           | 0        | 0          | 0.0 |
 

@@ -1,2 +1,3 @@
 --color
 --require ./habitable_programs/tools/common/spec/spec_helper
+--default-path ./habitable_programs/tools/common/spec

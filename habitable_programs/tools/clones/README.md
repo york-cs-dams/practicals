@@ -3,8 +3,7 @@
 This practical covers:
 
 * Implementing (a simplified) Baker's algorithm for clone detection
-* ...
-* ...
+* Improving on Baker's algorithm with some practical optimisations
 
 ## Building the clone detection tool
 
@@ -41,27 +40,27 @@ Your first task is to implement a method that compares two pieces of source code
 ...
 Failed examples:
 
-rspec ./tools/common/spec/subjects/source_spec.rb:6 # Subjects::Source common_fragment_with should find first fragment of appropriate length
-rspec ./tools/common/spec/subjects/source_spec.rb:13 # Subjects::Source common_fragment_with should find first fragment of appropriate length when match occurs in middle of sources
-rspec ./tools/common/spec/subjects/source_spec.rb:20 # Subjects::Source common_fragment_with should return nil when there is no common fragment
-rspec ./tools/common/spec/subjects/source_spec.rb:27 # Subjects::Source common_fragment_with should find fragments when length is larger than 1
-rspec ./tools/common/spec/subjects/source_spec.rb:34 # Subjects::Source common_fragment_with should return nil when there is no fragment of the appropriate length
+rspec ./habitable_programs/tools/common/spec/subjects/source_spec.rb:6 # Subjects::Source common_fragment_with should find first fragment of appropriate length
+rspec ./habitable_programs/tools/common/spec/subjects/source_spec.rb:13 # Subjects::Source common_fragment_with should find first fragment of appropriate length when match occurs in middle of sources
+rspec ./habitable_programs/tools/common/spec/subjects/source_spec.rb:20 # Subjects::Source common_fragment_with should return nil when there is no common fragment
+rspec ./habitable_programs/tools/common/spec/subjects/source_spec.rb:27 # Subjects::Source common_fragment_with should find fragments when length is larger than 1
+rspec ./habitable_programs/tools/common/spec/subjects/source_spec.rb:34 # Subjects::Source common_fragment_with should return nil when there is no fragment of the appropriate length
 ```
 
-You can examine the expected behaviour of the common fragment method by looking at the failures and at the test case source code in `./tools/common/spec/subjects/source_spec.rb`. Your implementation of the common fragment algorithm should be specified in the `common_fragment_with` method of `./tools/common/lib/subjects/source.rb`.
+You can examine the expected behaviour of the common fragment method by looking at the failures and at the test case source code in `./habitable_programs/tools/common/spec/subjects/source_spec.rb`. Your implementation of the common fragment algorithm should be specified in the `common_fragment_with` method of `./habitable_programs/tools/common/lib/subjects/source.rb`.
 
 
 ### Computing longest common fragments
 
-Next, implement the `longest_common_fragment_with` method to locate common fragments with at least as many lines as any other common fragment. Once again, there are some test cases that you can use to get started. In `tools/common/spec/subjects/source_spec` change the `xdescribe` on line 43 to `describe` and run `vado bundle exec rspec`. You will see some new failures:
+Next, implement the `longest_common_fragment_with` method to locate common fragments with at least as many lines as any other common fragment. Once again, there are some test cases that you can use to get started. In `./habitable_programs/tools/common/spec/subjects/source_spec` change the `xdescribe` on line 43 to `describe` and run `vado bundle exec rspec`. You will see some new failures:
 
 ```sh
 > vado bundle exec rspec
 ...
-rspec ./tools/common/spec/subjects/source_spec.rb:44 # Subjects::Source longest_common_fragment_with should find longest common fragment between two sources
+rspec ./habitable_programs/tools/common/spec/subjects/source_spec.rb:44 # Subjects::Source longest_common_fragment_with should find longest common fragment between two sources
 ```
 
-Your implementation of the longest common fragment algorithm should be specified in the `longest_common_fragment_with` method of `./tools/common/lib/subjects/source.rb`. Hint: a recursive solution will change the method signature to `longest_common_fragment_with(other_source, longest_yet = [])`.
+Your implementation of the longest common fragment algorithm should be specified in the `longest_common_fragment_with` method of `./habitable_programs/tools/common/lib/subjects/source.rb`. Hint: a recursive solution will change the method signature to `longest_common_fragment_with(other_source, longest_yet = [])`.
 
 Once the `longest_common_fragment_with` method is complete, you can start using the `clones` tool to identify code clones within a project. For example, running `vado clones detect hello_world` will produce some useful output:
 
@@ -91,9 +90,9 @@ Once the `longest_common_fragment_with` method is complete, you can start using 
 
 ## Improving the clone detection tool
 
-When running the initial implemenation of `clones` on more realistic projects, it becomes apparent that it often reports false postivies (i.e., fragments of text that are not code clones, or that are not interesting code clones). For example, running `vado clones detect adamantium` will return lots of fragments that return comments and common Ruby keywords. Let's fix this...
+When running the initial implementation of `clones` on more realistic projects, it becomes apparent that it often reports false positives (i.e., fragments of text that are not code clones, or that are not interesting code clones). For example, running `vado clones detect adamantium` will return lots of fragments that return comments and common Ruby keywords. Let's fix this...
 
-The most reliable way to remove comments from Ruby source code is to use the Ruby parser to build an AST (which strips away comments by default) and then to use the unparser to pretty print the AST. The `Source` file provides a `normalized_source` method that strips comments using these technique. To make use of this, simply change line 20 of `tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.normalized_source, other_file.normalized_source) }`. Once the `clones` tool ignores comments, it will identify fewer clones for adamantium:
+The most reliable way to remove comments from Ruby source code is to use the Ruby parser to build an AST (which strips away comments by default) and then to use the unparser to pretty print the AST. The `Source` file provides a `normalized_source` method that strips comments using these technique. To make use of this, simply change line 20 of `./habitable_programs/tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.normalized_source, other_file.normalized_source) }`. Once the `clones` tool ignores comments, it will identify fewer clones for adamantium:
 
 ```sh
 > vado clones detect adamantium
@@ -267,9 +266,9 @@ Now implement `all_common_fragments_with` on Source. An outstanding implementati
 
 ### Implementing the **parameterised** version of Baker's algorithm
 
-Preprocess the AST to replace any concrete module, class, method, attribute and variable names with a constant (e.g., `module Measurement` -> `module M` and `module Detection` -> `module D`). This will allow clone detection for semantically equivalent but syntatically different fragments.
+Preprocess the AST to replace any concrete module, class, method, attribute and variable names with a constant (e.g., `module Measurement` -> `module M` and `module Detection` -> `module D`). This will allow clone detection for semantically equivalent but syntactically different fragments.
 
-Start by adding a new method SourceFile, say `parameterized_source`, that performs this preprocessing. Then, change line 20 of `tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.parameterized_source, other_file.parameterized_source) }`.
+Start by adding a new method SourceFile, say `parameterized_source`, that performs this preprocessing. Then, change line 20 of `./habitable_programs/tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.parameterized_source, other_file.parameterized_source) }`.
 
 
 ## Remediation
