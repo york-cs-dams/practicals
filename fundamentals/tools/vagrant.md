@@ -143,7 +143,7 @@ The Git repositories for the practicals and for the assessment provide a Vagrant
 You will often need to run commands on your Vagrant VMs, and doing so via `vagrant ssh` is cumbersome. Instead, you can add the following line to the end of your `~/.bash_profile` (or equivalent):
 
 ```sh
-vado() { vagrant ssh -c "cd /vagrant && $1 $2 $3 $4 $5 $6 $7 $8 $9" ;}
+vado() { vagrant ssh -c "cd /vagrant && $*" ;}
 ```
 
 Restart your terminal, and you should now be able to type `vado COMMAND_TO_RUN_ON_VM`.
