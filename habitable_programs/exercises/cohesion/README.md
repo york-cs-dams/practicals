@@ -1,5 +1,7 @@
 # Detecting cohesion
 
+**This practical is not quite finished yet. I'll be making changes until Fri/5 (30th October)**
+
 This practical covers:
 
 * Implementing the LCOM4 metric for computing the cohesion of a class
