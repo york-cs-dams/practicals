@@ -2,9 +2,9 @@
 
 This practical covers:
 
-* Implementing the ABC metric for measuring the complexity of methods
-* ...
-* ...
+1. Implementing the ABC metric for measuring the complexity of methods
+2. Applying the ABC metric to locate complex methods
+3. Refactoring complex methods to improve the habitability of a program
 
 ## Building the complexity tool
 
@@ -130,3 +130,21 @@ For a much more useful test of your implementation (!) try the `adamantium` samp
 | adamantium.rb#dup                           |  0          |
 | adamantium.rb#transform                     |  0          |
 | adamantium.rb#transform_unless              |  1          |
+
+
+## 2. Applying the size tool
+
+Now that you have a working version of the `complexity` tool, your task is to improve the code of a [series of web scraping scripts](../../data/scraper) that I have written. First of all, apply the `complexity` tool to find methods with the highest ABC scores: `vado size MODE scraper`.
+
+<!-- Which files and classes have the most lines of code? Which methods have the most lines of code? Are the longest methods in the longest classes?
+
+Look for methods that dominate their source files. These are likely to be good candidates for refactoring. -->
+
+
+## 3. Refactoring long methods
+
+Now that you have found a complex method or two in my [series of web scraping scripts](../../data/scraper), you can refactor to improve habitability. First of all, read the source code to see what the script is trying to achieve. ([when.rb](../../data/scraper/when.rb), for example continues quite a lot of detailed comments).
+
+Next, figure out what your chosen script is supposed to do, as there are no automated tests for these scripts (surprise!). For example, run your chosen script, such as: `vado scrape project_supervisor.rb` and then again with `vado scrape project_supervisor.rb` (notice that the output differs, thanks to the use of `sample`).
+
+Apply the refactorings described in the [getting simple lecture](http://dams.flippd.it/videos/14) to improve the code. In particular, can you identify loops or conditionals that can be removed? Can you use the template method or strategy patterns to simplify the code? Try a few different designs, and each time check that you have not broken the code by running the scripts. Compare your final version with a classmate: explain and justify your designs to each other.
