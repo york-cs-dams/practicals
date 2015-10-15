@@ -22,7 +22,9 @@ The lecture on observers provides the background for this exercise, and covers t
 
 Hint: it should be possible to pass all of the test cases without changing any of the assertions, though to do so you might need to design a more sophisticated observer architecture than the one described in the lecture.
 
-## Applying a plug-in architecture
+## Bonus: Applying a plug-in architecture
+
+*This exercise is hard. If you (partially) complete it, show your answer to Louis and you'll win a delicious prize.*
 
 Finally, you should apply the plug-in architecture from the lecture to the tools that you have built in earlier practicals. Your aim is to make it possible for any of the metrics to be specified as a plug-in. In other words, it should be possible for any metric to be shipped in its own gem, separate to (and depending on) a gem containing the core of the code metrics tool. This would allow, for example, users to pick and choose which metrics are available.
 
