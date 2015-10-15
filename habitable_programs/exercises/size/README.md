@@ -2,20 +2,15 @@
 
 This practical covers:
 
-* Evaluating the habitability of a system by measuring its size
-* Applying the measures to decide how to improve the habitability of a program
-* Refactorings that improve the habitability of a program by reducing the size of its parts
+1. Evaluating the habitability of a system by measuring its size
+2. Applying the measures to decide how to improve the habitability of a program
+3. Refactorings that improve the habitability of a program by reducing the size of its parts
 
-You are to build a tool that can automatically measure the size of Ruby programs. The tool will implement the size metrics discussed in the lectures.
+## 1. Building the size tool
 
+Your first task is to build a tool, called `size`, that implements all of the metrics discussed in the lectures. A partial implementation has been provided: the code in this repository contains an executable which can be invoked using `vado size ...`. Run `vado size help` for more information.
 
-## Building the size tool
-
-Your first task is to complete the `size` tool so that it implements all of the metrics discussed in the lectures. The code in this repository contains an executable which can be invoked using `vado size MODE PROJECT`. Run `vado size help` for more information.
-
-The sample projects in the `data` folder can be used to test the size tool.
-
-If you run, say, `vado size files hello_world` you'll notice that the size tool doesn't do much yet:
+The sample projects in the `data` folder can be used to test the size tool. If you run, say, `vado size files hello_world` you'll notice that the size tool doesn't do much yet:
 
 | Subject        | lines_of_code | number_of_modules | number_of_classes |
 | :------------- | :------------ | :---------------- | :---------------- |
@@ -140,6 +135,19 @@ For a more thorough test of your implementation, try the `adamantium` sample pro
 | adamantium.rb#transform_unless              | 3             | 2                    |
 
 
-## Applying the size tool
+## 2. Applying the size tool
 
-Now that you have a working version of the `size` tool, your task is to improve the code in `habitable_programs/data/scraper.rb`. First of all, apply the `size` tool to find the largest files, classes and methods: `vado size MODE scraper`
+Now that you have a working version of the `size` tool, your task is to improve the code of a [series of web scraping scripts](../../data/scraper) that I have written. First of all, apply the `size` tool to find the largest files, classes and methods: `vado size MODE scraper`.
+
+Which files and classes have the most lines of code? Which methods have the most lines of code? Are the longest methods in the longest classes?
+
+Look for methods that dominate their source files. These are likely to be good candidates for refactoring.
+
+
+## 3. Refactoring long methods
+
+Now that you have found a long method or two in my [series of web scraping scripts](../../data/scraper), you can refactor to improve habitability. First of all, read the source code to see what the script is trying to achieve. ([when.rb](../../data/scraper/when.rb), for example continues quite a lot of detailed comments).
+
+Next, figure out what your chosen script is supposed to do, as there are no automated tests for these scripts (surprise!). For example, run your chosen script for a few different inputs, such as: `vado scrape when.rb DAMS` and `vado scrape when.rb HACS`
+
+Apply several extract method refactorings (as described in [the lecture](http://dams.flippd.it/videos/11)) to improve the code. You will likely need to think carefully about how data flows through the existing methods to identify reasonable boundaries at which the long method can be broken down into small pieces. Try a few different extractions, and each time check that you have not broken the code by running the scripts. Compare your final version with a classmate: explain and justify your designs to each other.
