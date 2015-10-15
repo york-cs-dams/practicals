@@ -2,4 +2,4 @@
 cd /vagrant/habitable_programs/data
 tool=$1
 shift
-GLI_DEBUG=true bundle exec /vagrant/habitable_programs/tools/$tool/bin/$tool $@
+GLI_DEBUG=true bundle exec /vagrant/habitable_programs/exercises/$tool/bin/$tool $@

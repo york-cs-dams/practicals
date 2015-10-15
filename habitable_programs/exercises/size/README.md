@@ -3,8 +3,8 @@
 This practical covers:
 
 * Evaluating the habitability of a system by measuring its size
-* Applying the measures to decide how to improve the habitability of a system
-* Reflecting on the limitations of size metrics
+* Applying the measures to decide how to improve the habitability of a program
+* Refactorings that improve the habitability of a program by reducing the size of its parts
 
 You are to build a tool that can automatically measure the size of Ruby programs. The tool will implement the size metrics discussed in the lectures.
 
@@ -138,3 +138,8 @@ For a more thorough test of your implementation, try the `adamantium` sample pro
 | adamantium.rb#dup                           | 3             | 0                    |
 | adamantium.rb#transform                     | 5             | 1                    |
 | adamantium.rb#transform_unless              | 3             | 2                    |
+
+
+## Applying the size tool
+
+Now that you have a working version of the `size` tool, your task is to improve the code in `habitable_programs/data/scraper.rb`. First of all, apply the `size` tool to find the largest files, classes and methods: `vado size MODE scraper`
