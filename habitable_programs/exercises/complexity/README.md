@@ -136,9 +136,9 @@ For a much more useful test of your implementation (!) try the `adamantium` samp
 
 Now that you have a working version of the `complexity` tool, your task is to improve the code of a [series of web scraping scripts](../../data/scraper) that I have written. First of all, apply the `complexity` tool to find methods with the highest ABC scores: `vado size MODE scraper`.
 
-<!-- Which files and classes have the most lines of code? Which methods have the most lines of code? Are the longest methods in the longest classes?
+Which methods have the highest ABC score? How about for the individual A, B and C components? Which high scores do you think are most indiciative of a complexity problem?
 
-Look for methods that dominate their source files. These are likely to be good candidates for refactoring. -->
+Look for methods that contain many levels of nesting: this is usually a telltale sign of high complexity.
 
 
 ## 3. Refactoring long methods
