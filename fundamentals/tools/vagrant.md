@@ -24,6 +24,8 @@ And add the following line to the end of your `~/.bash_profile` (or equivalent):
 export VAGRANT_HOME=/var/tmp
 ```
 
+Now re-source (or simply quit and restart) your terminal.
+
 **Do this before using Vagrant!** You should only have to do this now, and never again (on your university/departmental account).
 
 Check that everything is working by running `vagrant` from the terminal. You should see something like this:
