@@ -18,9 +18,7 @@ class ProjectSupervisors
       if r.inner_text.include?('CSE')
         unless r.inner_text.include?('Teaching Staff')
           name = r.css("td.white a").inner_text
-          position = :lecturer
-          position = :senior if r.inner_text.include? "Senior"
-          position = :professor if r.inner_text.include? "Prof"
+          if r.inner_text.include?("Prof") || r.inner_text.include?("Reader") then position = :professor elsif r.inner_text.include?("Senior") || r.inner_text.include?("Fellow") then position = :senior else position = :lecturer end
           academics << Academic.new(name: name, position: position)
         end
       end
