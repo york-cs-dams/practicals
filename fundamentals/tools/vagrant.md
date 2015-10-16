@@ -15,10 +15,16 @@ You should follow along with the tutorial, and refer to the [Vagrant documentati
 Vagrant (and VirtualBox) is installed on all Linux machines in the student labs. However, it will by default store all VM images in your home directory. These images are often large (several GBs), so I instead recommend that you install your VM images to a temporary directory. To do this, run the following command from the terminal:
 
 ```sh
-VBoxManage setproperty machinefolder /tmp
+VBoxManage setproperty machinefolder /var/tmp
 ```
 
-**Run this command before doing anything else with Vagrant.** You should only have to do this now, and never again (on your university/departmental account).
+And add the following line to the end of your `~/.bash_profile` (or equivalent):
+
+```sh
+export VAGRANT_HOME=/var/tmp
+```
+
+**Do this before using Vagrant!** You should only have to do this now, and never again (on your university/departmental account).
 
 Check that everything is working by running `vagrant` from the terminal. You should see something like this:
 
