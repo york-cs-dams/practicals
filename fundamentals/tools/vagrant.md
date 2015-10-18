@@ -158,4 +158,4 @@ Restart your terminal, and you should now be able to type `vado COMMAND_TO_RUN_O
 
 For example: `vado rake test`
 
-If the output from this command isn't familiar to you, it's time to take a look at the RSpec [video](http://dams.flippd.it/videos/4) and [tutorial](../rspec/1_introduction.md).
+If the output from this command isn't familiar to you, it's time to take a look at the RSpec [video](http://dams.flippd.it/videos/4) and [tutorial](../rspec/1_basics.md).
