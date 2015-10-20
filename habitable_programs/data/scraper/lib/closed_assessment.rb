@@ -37,4 +37,4 @@ class ClosedAssessment
   end
 end
 
-ClosedAssessment.new.run("NUMA")
+ClosedAssessment.new.run(ARGV[0])
