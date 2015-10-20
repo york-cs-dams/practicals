@@ -21,7 +21,9 @@ module Subjects
     end
 
     def normalized_source
-      Source.new(Unparser.unparse(ast).each_line, self)
+      normalized = Unparser.unparse(ast)
+      normalized = normalized.each_line.map { |line| line.delete(" \t") }
+      Source.new(normalized, self)
     end
 
     def to_s

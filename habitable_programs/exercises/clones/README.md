@@ -3,6 +3,7 @@
 This practical covers:
 
 * Implementing (a simplified) Baker's algorithm for clone detection
+* Applying clone detection to identify clones, and refactoring to remove them
 * Improving on Baker's algorithm with some practical optimisations
 
 ## Building the clone detection tool
@@ -92,7 +93,11 @@ Once the `longest_common_fragment_with` method is complete, you can start using 
 
 When running the initial implementation of `clones` on more realistic projects, it becomes apparent that it often reports false positives (i.e., fragments of text that are not code clones, or that are not interesting code clones). For example, running `vado clones detect adamantium` will return lots of fragments that return comments and common Ruby keywords. Let's fix this...
 
-The most reliable way to remove comments from Ruby source code is to use the Ruby parser to build an AST (which strips away comments by default) and then to use the unparser to pretty print the AST. The `Source` file provides a `normalized_source` method that strips comments using these technique. To make use of this, simply change line 20 of `./habitable_programs/tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.normalized_source, other_file.normalized_source) }`. Once the `clones` tool ignores comments, it will identify fewer clones for adamantium:
+The most reliable way to remove comments from Ruby source code is to use the Ruby parser to build an AST (which strips away comments by default) and then to use the unparser to pretty print the AST. The `Source` file provides a `normalized_source` method that strips comments using these technique. To make use of this, simply change line 20 of `./habitable_programs/tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.normalized_source, other_file.normalized_source) }`.
+
+The `normalized_source` method will also remove indentation from the source code, so that identical fragments that appear at different levels of nesting might also be detected.
+
+Once the `clones` tool ignores comments (and indentation), it will identify fewer clones for adamantium:
 
 ```sh
 > vado clones detect adamantium
@@ -269,8 +274,3 @@ Now implement `all_common_fragments_with` on Source. An outstanding implementati
 Preprocess the AST to replace any concrete module, class, method, attribute and variable names with a constant (e.g., `module Measurement` -> `module M` and `module Detection` -> `module D`). This will allow clone detection for semantically equivalent but syntactically different fragments.
 
 Start by adding a new method SourceFile, say `parameterized_source`, that performs this preprocessing. Then, change line 20 of `./habitable_programs/tools/clones/lib/clone_detector.rb` to read: `.flat_map { |other_file| clones_between(file.parameterized_source, other_file.parameterized_source) }`.
-
-
-## Remediation
-
-### Bonus: extract a Fragment class from Source
