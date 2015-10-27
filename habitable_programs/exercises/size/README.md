@@ -30,7 +30,7 @@ Test your implementation on the `hello_world` project by running `vado size file
 
 | Subject        | lines_of_code | number_of_modules | number_of_classes |
 | :------------- | :------------ | :---------------- | :---------------- |
-| hello_world.rb | 13            | 0                 | 1                 |
+| hello_world.rb | 14           | 0                 | 1                 |
 
 For a more thorough test of your implementation, try the `adamantium` sample project by running: `vado size files adamantium`. The expected results are:
 
