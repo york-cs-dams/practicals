@@ -12,7 +12,7 @@ module Measurement
         lines_of_code: count_lines_of_code(clazz),
         number_of_methods: count_methods(clazz),
         number_of_class_methods: count_class_methods(clazz),
-        number_of_attribtutes: count_attributes(clazz)
+        number_of_attributes: count_attributes(clazz)
       }
     end
 
