@@ -17,7 +17,7 @@ There are several parsers for Ruby, including the `parser` gem, which -- inciden
 
 The `parser` gem provides both a library that we can load in our own Ruby programs (like most gems), and a command that we can run from the terminal, `ruby-parse`. Let's take a look at the command-line version first.
 
-In a terminal, run: `vado ruby-parse -e "1 + 2"`. You should see the following output:
+In a terminal, run: `vado ruby-parse -e \"1 + 2\"`. You should see the following output:
 
 ```
 (send
