@@ -83,22 +83,22 @@ end
 
 And here, it appears that there are no attributes (instance variables) at first glance. However, recall that `attr_accessor` (and `attr_reader` and `attr_writer`) are Ruby shorthands for defining attributes (along with getter and/or setter methods). For this program, name is an instance variable and our attribute counter should return a count of 1.
 
-Test your implementation on the `hello_world` project by running `vado size files hello_world`. The expected results are:
+Test your implementation on the `hello_world` project by running `vado size classes hello_world`. The expected results are:
 
-| Subject                   | lines_of_code | number_of_methods | number_of_class_methods | number_of_attribtutes |
-| :------------------------ | :------------ | :---------------- | :---------------------- | :-------------------- |
-| hello_world.rb#HelloWorld | 11            | 2                 | 0                       | 1                     |
+| Subject                   | lines_of_code | number_of_methods | number_of_class_methods | number_of_attributes |
+| :------------------------ | :------------ | :---------------- | :---------------------- | :------------------- |
+| hello_world.rb#HelloWorld | 11            | 2                 | 0                       | 1                    |
 
 
-For a more thorough test of your implementation, try the `adamantium` sample project by running: `vado size files adamantium`. The expected results are:
+For a more thorough test of your implementation, try the `adamantium` sample project by running: `vado size classes adamantium`. The expected results are:
 
-| Subject                                   | lines_of_code | number_of_methods | number_of_class_methods | number_of_attribtutes |
-| :---------------------------------------- | :------------ | :---------------- | :---------------------- | :-------------------- |
-| adamantium/freezer.rb#Flat                | 15            | 0                 | 1                       | 0                     |
-| adamantium/freezer.rb#Deep                | 15            | 0                 | 1                       | 0                     |
-| adamantium/freezer.rb#UnknownFreezerError | 1             | 0                 | 0                       | 0                     |
-| adamantium/freezer.rb#OptionError         | 1             | 0                 | 0                       | 0                     |
-| adamantium/freezer.rb#Freezer             | 128           | 0                 | 6                       | 1                     |
+| Subject                                   | lines_of_code | number_of_methods | number_of_class_methods | number_of_attributes |
+| :---------------------------------------- | :------------ | :---------------- | :---------------------- | :------------------- |
+| adamantium/freezer.rb#Flat                | 15            | 0                 | 1                       | 0                    |
+| adamantium/freezer.rb#Deep                | 15            | 0                 | 1                       | 0                    |
+| adamantium/freezer.rb#UnknownFreezerError | 1             | 0                 | 0                       | 0                    |
+| adamantium/freezer.rb#OptionError         | 1             | 0                 | 0                       | 0                    |
+| adamantium/freezer.rb#Freezer             | 128           | 0                 | 6                       | 1                    |
 
 
 ### Measuring methods
@@ -110,7 +110,7 @@ Finally, extend MethodMeasurer (in `lib/measurement/method_measurer.rb` to imple
 
 Note that each of the methods named `count_XXX` receive a method object (an instance of `lib/subjects/method.rb`).
 
-Test your implementation on the `hello_world` project by running `vado size files hello_world`. The expected results are:
+Test your implementation on the `hello_world` project by running `vado size methods hello_world`. The expected results are:
 
 | Subject                   | lines_of_code | number_of_parameters |
 | :------------------------ | :------------ | :------------------- |
@@ -118,7 +118,7 @@ Test your implementation on the `hello_world` project by running `vado size file
 | hello_world.rb#run        | 3             | 0                    |
 
 
-For a more thorough test of your implementation, try the `adamantium` sample project by running: `vado size files adamantium`. The expected results are:
+For a more thorough test of your implementation, try the `adamantium` sample project by running: `vado size methods adamantium`. The expected results are:
 
 | Subject                                     | lines_of_code | number_of_parameters |
 | :------------------------------------------ | :------------ | :------------------- |
