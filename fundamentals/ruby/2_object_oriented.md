@@ -434,7 +434,7 @@ Q3. Consider the scenario of event ticketing (e.g., for a sports match, a concer
 
 #### Hashing
 
-Every Ruby object responds to the `hash` message, which requests a numerical identifier for an object. The `hash` message is mostly used internally by Ruby to, for example, arrange the elements of a `Hash.` For our purposes, we need to know that we **must override hash whenever we override eql?**:
+Every Ruby object responds to the `hash` message, which requests a numerical identifier for an object. The `hash` message is mostly used internally by Ruby to, for example, arrange the elements of objects inside our data structures, such as Arrays. For our purposes, we only need to know that we **must override hash whenever we override eql?**, as shown below. NB: that the `hash` message has very little to do with the `Hash` type. The former is a message that Ruby sends when we need to *efficiently* determine whether two objects are the same, and the latter is a type that implements an "associative array" (or "dictionary") data structure.
 
 ```ruby
 class Money
