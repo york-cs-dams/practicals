@@ -1,11 +1,10 @@
 # Detecting cohesion
 
-**This practical is not quite finished yet. I'll be making changes until Fri/5 (30th October)**
-
 This practical covers:
 
-* Implementing the LCOM4 metric for computing the cohesion of a class
-* Extending the LCOM4 metric to better suit Ruby
+1. Implementing the LCOM4 metric for computing the cohesion of a class
+2. Extending the LCOM4 metric to better suit Ruby
+3. Refactoring to separate responsibilities (and hence improve cohesion)
 
 ## Building the cohesion tool
 
@@ -82,9 +81,61 @@ Apply the completed tool to the sample projects using `vado cohesion lcom4`. The
 
 ## Extending the LCOM4 metric to better suit Ruby
 
-Your final task is to extend the LCOM4 metric to improve its performance for Ruby programs. In particular, you should:
+Your next task is to extend the LCOM4 metric to improve its performance for Ruby programs. In particular, you should:
 
 1. Add dependencies between methods that use one or more of the same instance variables. (This is actually a requirement for LCOM4, but we've overlooked this until now). For example, if `bake` uses `@toppings` and `@oven`, and `rating` uses `@toppings` then there should be a dependency between `bake` and `rating`.
 2. Recall that Ruby allows getter and setter methods to be specified using the `attr_reader`, `attr_writer` and `attr_accessor` methods. Update your implementation so that the dependencies between `foo` and `@foo` (and between `foo=` and `@foo`) are recorded.
 3. In my own testing, it often seemed that a class's constructor (`initialize` method) would cause several otherwise isolated components to be joined together. Experiment with excluding the `initialize` method from the dependency graph. Does this improve your results? If so, why?
 4. Ensure that inherited methods are not included in the dependency graph. (This one is quite tricky!)
+
+
+## Refactoring to separate responsibilities
+
+Now that you have a working version of the `cohesion` tool, your task is to discover whether there is code from earlier practicals or from your assessment that can be refactored in order to separate responsibilities.
+
+Start by running `cohesion lcom4` on all of the code that you have developed in the practicals. You can do this by running: `vado cohesion lcom4 ../exercises`. The output will be a list of issues detected with your code, and with the code that I have provided. For any class with a high LCOM4 score (i.e., higher than 4), consider whether it has more than one responsibility. If so, you can consider extract additional classes in order to separate out these responsibilities. A common tactic, in Ruby at least, is to extract wrapper (decorator) classes for ancillary responsibilities, as discussed in the [getting cohesion lecture](http://flippd.it/videos/23).
+
+Finally, note that it's quite possible to fool LCOM4 into providing a low score for an class that has poor cohesion. For example, consider a class of the form:
+
+```ruby
+class NotCohesive
+  def run
+    first_method
+    second_method
+    third_method
+    fourth_method
+    # ...
+    ninth_method
+  end
+
+  def first_method
+    # do lots of work but don't call any other method in this class
+  end
+
+  def second_method
+    # do lots of work but don't call any other method in this class
+  end
+
+  def third_method
+    # do lots of work but don't call any other method in this class
+  end
+
+  def fourth_method
+    # do lots of work but don't call any other method in this class
+  end
+
+  # ...
+
+  def ninth_method
+    # do lots of work but don't call any other method in this class
+  end
+end
+```
+
+Note that (due to the `run` method) this class has an LCOM4 score of 1. But in practice it seems not to be very cohesive: every method has its own responsibility. A better design here would be to extract a few classes (and possibly 9 classes!) that encapsulate a subset of each of these methods.
+
+Take another look at your code: are there classes that have more than one responsibility that were not detected by the LCOM4 metric? If so, apply some of the other tactics in the [getting cohesion lecture](http://flippd.it/videos/23) to resolve this issue. In particular, can you:
+
+* Extract a classes for each extra responsibility
+* Extract a class to encapsulate manipulation of primitive objects or to data clumps
+* Move methods onto these new classes to avoid feature envy (and law of demeter violations)

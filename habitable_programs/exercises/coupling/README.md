@@ -1,11 +1,10 @@
 # Measuring Coupling
 
-**This practical is not quite finished yet. I'll be making changes until Fri/5 (30th October)**
-
 This practical covers:
 
-* Implementing the MPC metric for measuring coupling
-* Investigating how the CBO metric can be implemented for dynamic languages like Ruby
+1. Implementing the MPC metric for measuring coupling
+2. Refactoring to achieve looser coupling
+3. Investigating how the CBO metric can be implemented for dynamic languages like Ruby
 
 ## Building the coupling tool
 
@@ -43,9 +42,19 @@ Apply the completed tool to the sample projects using `vado coupling mpc`. The e
 | hello_world/hello_world.rb#run                         | 2                     | 2                       | 0                            | 0   |
 
 
+## Refactoring to achieve loose coupling
+
+Now that you have a working version of the `coupling` tool, your task is to improve the code of a (very fake) [student information system](../../data/student_information_system) that I have written. Start by taking a look at the code in the `habitable_programs/data/student_information_system` directory and by running the tests with `vado rspec`. **For the purposes of this practical, you should assume that you cannot change `lib/york/student_info.rb` because it has been given to you by your customer (e.g., the university).**
+
+Apply the coupling tool to find method that might not be loosely coupled: `vado coupling mpc student_information_system`. You should see that both methods in the `MarkingSystem` class have relatively high MPC scores. To determine whether this is problematic or not, take a look at the source code. What dependencies does MarkingSystem have? Which are the most unstable dependencies (i.e., what things are likely to change without your control and would break your code)?
+
+Apply the refactorings described in the [getting loose coupling lecture](http://dams.flippd.it/videos/14) to improve the code. In particular, how might we introduce a gateway and hence break the dependency on `York::StudentInfo`, which is code that we don't own? Are there any law of demeter violations that you feel need to be addressed? Are there opportunities to invert control or inject depenencies?
+
+Whilst performing these refactorings, keep in mind that your customer (e.g., the university) might choose to release a new version of `York::StudentInfo` with a different API. Think about whether the changes that you are making have made it easier or more difficult to adopt a new version of `York::StudentInfo`.
+
 ## Prototyping the CBO metric
 
-Your final task is to invesigate how to implement the CBO metric, which was discussed in the lectures. CBO requires information about the types in the system, and (for dynamically typed languages like Ruby) is quite inaccurate, expensive (or both!) when calculated statically (i.e., by inspecting source code without running it). Instead, it is often cheaper and more accurate to calculate CBO at runtime.
+Your final task is to investigate how to implement the CBO metric, which was discussed in the lectures. CBO requires information about the types in the system, and (for dynamically typed languages like Ruby) is quite inaccurate, expensive (or both!) when calculated statically (i.e., by inspecting source code without running it). Instead, it is often cheaper and more accurate to calculate CBO at runtime.
 
 Ruby provides a built-in runtime tracing library for monitoring the execution of a program, which you should use to implement the CBO metric:
 
